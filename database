@@ -1,0 +1,528 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1:3306
+-- Généré le : ven. 10 avr. 2026 à 09:46
+-- Version du serveur : 8.2.0
+-- Version de PHP : 8.3.0
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `client_lourd_overlay`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `auth_group`
+--
+
+CREATE TABLE `auth_group` (
+  `id` int NOT NULL,
+  `name` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `auth_group_permissions`
+--
+
+CREATE TABLE `auth_group_permissions` (
+  `id` bigint NOT NULL,
+  `group_id` int NOT NULL,
+  `permission_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `auth_permission`
+--
+
+CREATE TABLE `auth_permission` (
+  `id` int NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `content_type_id` int NOT NULL,
+  `codename` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `auth_permission`
+--
+
+INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALUES
+(1, 'Can add log entry', 1, 'add_logentry'),
+(2, 'Can change log entry', 1, 'change_logentry'),
+(3, 'Can delete log entry', 1, 'delete_logentry'),
+(4, 'Can view log entry', 1, 'view_logentry'),
+(5, 'Can add permission', 3, 'add_permission'),
+(6, 'Can change permission', 3, 'change_permission'),
+(7, 'Can delete permission', 3, 'delete_permission'),
+(8, 'Can view permission', 3, 'view_permission'),
+(9, 'Can add group', 2, 'add_group'),
+(10, 'Can change group', 2, 'change_group'),
+(11, 'Can delete group', 2, 'delete_group'),
+(12, 'Can view group', 2, 'view_group'),
+(13, 'Can add user', 4, 'add_user'),
+(14, 'Can change user', 4, 'change_user'),
+(15, 'Can delete user', 4, 'delete_user'),
+(16, 'Can view user', 4, 'view_user'),
+(17, 'Can add content type', 5, 'add_contenttype'),
+(18, 'Can change content type', 5, 'change_contenttype'),
+(19, 'Can delete content type', 5, 'delete_contenttype'),
+(20, 'Can view content type', 5, 'view_contenttype'),
+(21, 'Can add session', 6, 'add_session'),
+(22, 'Can change session', 6, 'change_session'),
+(23, 'Can delete session', 6, 'delete_session'),
+(24, 'Can view session', 6, 'view_session'),
+(25, 'Can add tournoi', 8, 'add_tournoi'),
+(26, 'Can change tournoi', 8, 'change_tournoi'),
+(27, 'Can delete tournoi', 8, 'delete_tournoi'),
+(28, 'Can view tournoi', 8, 'view_tournoi'),
+(29, 'Can add reservation', 7, 'add_reservation'),
+(30, 'Can change reservation', 7, 'change_reservation'),
+(31, 'Can delete reservation', 7, 'delete_reservation'),
+(32, 'Can view reservation', 7, 'view_reservation');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `auth_user`
+--
+
+CREATE TABLE `auth_user` (
+  `id` int NOT NULL,
+  `password` varchar(128) NOT NULL,
+  `last_login` datetime(6) DEFAULT NULL,
+  `is_superuser` tinyint(1) NOT NULL,
+  `username` varchar(150) NOT NULL,
+  `first_name` varchar(150) NOT NULL,
+  `last_name` varchar(150) NOT NULL,
+  `email` varchar(254) NOT NULL,
+  `is_staff` tinyint(1) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `date_joined` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `auth_user`
+--
+
+INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
+(1, 'pbkdf2_sha256$1200000$1xZmSABMGHI5j2qH8Zr4Rc$vALc6Qocksh5kgp4/QC99y07DVvfFFC42fwCAvcEbCQ=', '2026-04-10 08:06:24.483994', 1, 'admin', 'Admin', 'User', 'admin@test.com', 1, 1, '2026-01-01 00:00:00.000000');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `auth_user_groups`
+--
+
+CREATE TABLE `auth_user_groups` (
+  `id` bigint NOT NULL,
+  `user_id` int NOT NULL,
+  `group_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `auth_user_user_permissions`
+--
+
+CREATE TABLE `auth_user_user_permissions` (
+  `id` bigint NOT NULL,
+  `user_id` int NOT NULL,
+  `permission_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `django_admin_log`
+--
+
+CREATE TABLE `django_admin_log` (
+  `id` int NOT NULL,
+  `action_time` datetime(6) NOT NULL,
+  `object_id` longtext,
+  `object_repr` varchar(200) NOT NULL,
+  `action_flag` smallint UNSIGNED NOT NULL,
+  `change_message` longtext NOT NULL,
+  `content_type_id` int DEFAULT NULL,
+  `user_id` int NOT NULL
+) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `django_content_type`
+--
+
+CREATE TABLE `django_content_type` (
+  `id` int NOT NULL,
+  `app_label` varchar(100) NOT NULL,
+  `model` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `django_content_type`
+--
+
+INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
+(1, 'admin', 'logentry'),
+(2, 'auth', 'group'),
+(3, 'auth', 'permission'),
+(4, 'auth', 'user'),
+(5, 'contenttypes', 'contenttype'),
+(7, 'framework_cybergamecafe', 'reservation'),
+(8, 'framework_cybergamecafe', 'tournoi'),
+(6, 'sessions', 'session');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `django_migrations`
+--
+
+CREATE TABLE `django_migrations` (
+  `id` bigint NOT NULL,
+  `app` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `applied` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `django_migrations`
+--
+
+INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
+(1, 'contenttypes', '0001_initial', '2026-04-10 07:47:29.746575'),
+(2, 'auth', '0001_initial', '2026-04-10 07:47:30.954806'),
+(3, 'admin', '0001_initial', '2026-04-10 07:47:31.251182'),
+(4, 'admin', '0002_logentry_remove_auto_add', '2026-04-10 07:47:31.262960'),
+(5, 'admin', '0003_logentry_add_action_flag_choices', '2026-04-10 07:47:31.272851'),
+(6, 'contenttypes', '0002_remove_content_type_name', '2026-04-10 07:47:31.447116'),
+(7, 'auth', '0002_alter_permission_name_max_length', '2026-04-10 07:47:31.585203'),
+(8, 'auth', '0003_alter_user_email_max_length', '2026-04-10 07:47:31.658864'),
+(9, 'auth', '0004_alter_user_username_opts', '2026-04-10 07:47:31.672877'),
+(10, 'auth', '0005_alter_user_last_login_null', '2026-04-10 07:47:31.810331'),
+(11, 'auth', '0006_require_contenttypes_0002', '2026-04-10 07:47:31.817821'),
+(12, 'auth', '0007_alter_validators_add_error_messages', '2026-04-10 07:47:31.831006'),
+(13, 'auth', '0008_alter_user_username_max_length', '2026-04-10 07:47:31.986434'),
+(14, 'auth', '0009_alter_user_last_name_max_length', '2026-04-10 07:47:32.141850'),
+(15, 'auth', '0010_alter_group_name_max_length', '2026-04-10 07:47:32.200115'),
+(16, 'auth', '0011_update_proxy_permissions', '2026-04-10 07:47:32.210409'),
+(17, 'auth', '0012_alter_user_first_name_max_length', '2026-04-10 07:47:32.363944'),
+(18, 'framework_cybergamecafe', '0001_initial', '2026-04-10 07:47:33.032259'),
+(19, 'sessions', '0001_initial', '2026-04-10 07:47:33.110260');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `django_session`
+--
+
+CREATE TABLE `django_session` (
+  `session_key` varchar(40) NOT NULL,
+  `session_data` longtext NOT NULL,
+  `expire_date` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `django_session`
+--
+
+INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('yfq5zwoklsfa7i4d6nxn7bxb9cndrerl', '.eJxVjEkKwkAQAP_SZxlmcXpCjt59w9BbTFQSyHIK_l0COei1qqgdKm1rX7fF5jootBDg8suY5GXjIfRJ42NyMo3rPLA7Enfaxd0ntfftbP8GPS09tJB8liRBOkvWeI2daKFiXNAiB76mFKRLiMoUUbGErKbmM2oTBZHh8wUEiDi0:1wB6si:3SwI8eSnnxJTIHqNUkCpfYHwfTI3l5X1n7bNHvgGh7I', '2026-04-24 08:06:24.492769');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `framework_cybergamecafe_reservation`
+--
+
+CREATE TABLE `framework_cybergamecafe_reservation` (
+  `id` bigint NOT NULL,
+  `motif` longtext NOT NULL,
+  `temps_secondes` int NOT NULL,
+  `voucher` varchar(12) NOT NULL,
+  `user_id` int NOT NULL,
+  `tournoi_id` bigint DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `framework_cybergamecafe_reservation`
+--
+
+INSERT INTO `framework_cybergamecafe_reservation` (`id`, `motif`, `temps_secondes`, `voucher`, `user_id`, `tournoi_id`) VALUES
+(1, 'fortnite ', 3600, 'U4MEKTJN47HA', 1, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `framework_cybergamecafe_tournoi`
+--
+
+CREATE TABLE `framework_cybergamecafe_tournoi` (
+  `id` bigint NOT NULL,
+  `nom` varchar(100) NOT NULL,
+  `jeu` varchar(100) NOT NULL,
+  `date` date NOT NULL,
+  `heure` time(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `framework_cybergamecafe_tournoi_participants`
+--
+
+CREATE TABLE `framework_cybergamecafe_tournoi_participants` (
+  `id` bigint NOT NULL,
+  `tournoi_id` bigint NOT NULL,
+  `user_id` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `auth_group`
+--
+ALTER TABLE `auth_group`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Index pour la table `auth_group_permissions`
+--
+ALTER TABLE `auth_group_permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `auth_group_permissions_group_id_permission_id_0cd325b0_uniq` (`group_id`,`permission_id`),
+  ADD KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`);
+
+--
+-- Index pour la table `auth_permission`
+--
+ALTER TABLE `auth_permission`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`);
+
+--
+-- Index pour la table `auth_user`
+--
+ALTER TABLE `auth_user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- Index pour la table `auth_user_groups`
+--
+ALTER TABLE `auth_user_groups`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `auth_user_groups_user_id_group_id_94350c0c_uniq` (`user_id`,`group_id`),
+  ADD KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`);
+
+--
+-- Index pour la table `auth_user_user_permissions`
+--
+ALTER TABLE `auth_user_user_permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `auth_user_user_permissions_user_id_permission_id_14a6b632_uniq` (`user_id`,`permission_id`),
+  ADD KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`);
+
+--
+-- Index pour la table `django_admin_log`
+--
+ALTER TABLE `django_admin_log`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `django_admin_log_content_type_id_c4bce8eb_fk_django_co` (`content_type_id`),
+  ADD KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`);
+
+--
+-- Index pour la table `django_content_type`
+--
+ALTER TABLE `django_content_type`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`);
+
+--
+-- Index pour la table `django_migrations`
+--
+ALTER TABLE `django_migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `django_session`
+--
+ALTER TABLE `django_session`
+  ADD PRIMARY KEY (`session_key`),
+  ADD KEY `django_session_expire_date_a5c62663` (`expire_date`);
+
+--
+-- Index pour la table `framework_cybergamecafe_reservation`
+--
+ALTER TABLE `framework_cybergamecafe_reservation`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `voucher` (`voucher`),
+  ADD KEY `framework_cybergamec_user_id_ed909d49_fk_auth_user` (`user_id`),
+  ADD KEY `framework_cybergamec_tournoi_id_0eee3528_fk_framework` (`tournoi_id`);
+
+--
+-- Index pour la table `framework_cybergamecafe_tournoi`
+--
+ALTER TABLE `framework_cybergamecafe_tournoi`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `framework_cybergamecafe_tournoi_participants`
+--
+ALTER TABLE `framework_cybergamecafe_tournoi_participants`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `framework_cybergamecafe__tournoi_id_user_id_c7a37f95_uniq` (`tournoi_id`,`user_id`),
+  ADD KEY `framework_cybergamec_user_id_e41c17f5_fk_auth_user` (`user_id`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `auth_group`
+--
+ALTER TABLE `auth_group`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `auth_group_permissions`
+--
+ALTER TABLE `auth_group_permissions`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `auth_permission`
+--
+ALTER TABLE `auth_permission`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT pour la table `auth_user`
+--
+ALTER TABLE `auth_user`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `auth_user_groups`
+--
+ALTER TABLE `auth_user_groups`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `auth_user_user_permissions`
+--
+ALTER TABLE `auth_user_user_permissions`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `django_admin_log`
+--
+ALTER TABLE `django_admin_log`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `django_content_type`
+--
+ALTER TABLE `django_content_type`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT pour la table `django_migrations`
+--
+ALTER TABLE `django_migrations`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT pour la table `framework_cybergamecafe_reservation`
+--
+ALTER TABLE `framework_cybergamecafe_reservation`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `framework_cybergamecafe_tournoi`
+--
+ALTER TABLE `framework_cybergamecafe_tournoi`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `framework_cybergamecafe_tournoi_participants`
+--
+ALTER TABLE `framework_cybergamecafe_tournoi_participants`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `auth_group_permissions`
+--
+ALTER TABLE `auth_group_permissions`
+  ADD CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  ADD CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`);
+
+--
+-- Contraintes pour la table `auth_permission`
+--
+ALTER TABLE `auth_permission`
+  ADD CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`);
+
+--
+-- Contraintes pour la table `auth_user_groups`
+--
+ALTER TABLE `auth_user_groups`
+  ADD CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
+  ADD CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
+
+--
+-- Contraintes pour la table `auth_user_user_permissions`
+--
+ALTER TABLE `auth_user_user_permissions`
+  ADD CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  ADD CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
+
+--
+-- Contraintes pour la table `django_admin_log`
+--
+ALTER TABLE `django_admin_log`
+  ADD CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  ADD CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
+
+--
+-- Contraintes pour la table `framework_cybergamecafe_reservation`
+--
+ALTER TABLE `framework_cybergamecafe_reservation`
+  ADD CONSTRAINT `framework_cybergamec_tournoi_id_0eee3528_fk_framework` FOREIGN KEY (`tournoi_id`) REFERENCES `framework_cybergamecafe_tournoi` (`id`),
+  ADD CONSTRAINT `framework_cybergamec_user_id_ed909d49_fk_auth_user` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
+
+--
+-- Contraintes pour la table `framework_cybergamecafe_tournoi_participants`
+--
+ALTER TABLE `framework_cybergamecafe_tournoi_participants`
+  ADD CONSTRAINT `framework_cybergamec_tournoi_id_08b38461_fk_framework` FOREIGN KEY (`tournoi_id`) REFERENCES `framework_cybergamecafe_tournoi` (`id`),
+  ADD CONSTRAINT `framework_cybergamec_user_id_e41c17f5_fk_auth_user` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
