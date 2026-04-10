@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestion des tournois</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #ddd;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 6px 12px;
+        }
+    </style>
+</head>
+<body>
+
+
+<!-- FORMULAIRE -->
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="nom" placeholder="Nom tournoi" required>
+    <input type="text" name="jeu" placeholder="Jeu" required>
+    <input type="date" name="date" required>
+    <input type="time" name="heure" required>
+    <button type="submit">Créer</button>
+</form>
+
+<h2>Liste des tournois</h2>
+
+<table border="1">
+    <tr>
+        <th>Nom</th>
+        <th>Jeu</th>
+        <th>Date</th>
+        <th>Heure</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for t in tournois %}
+    <tr>
+        <td>{{ t.nom }}</td>
+        <td>{{ t.jeu }}</td>
+        <td>{{ t.date }}</td>
+        <td>{{ t.heure }}</td>
+
+        <td>
+            <!-- MODIFIER -->
+            <a href="{% url 'modifier_tournoi' t.id %}">✏️ Modifier</a>
+
+            <!-- SUPPRIMER (SECURISÉ) -->
+            <form action="{% url 'supprimer_tournoi' t.id %}" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">❌ Supprimer</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

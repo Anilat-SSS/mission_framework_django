@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <div class="barre-navigation">
+        <a href="{% url 'login' %}">Connexion</a>
+    </div>
+
+    <!-- CONTENU -->
+    <div class="container">
+        <section>
+            <h1>Créer un compte</h1>
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="champ-formulaire">
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                </div>
+
+                <div class="champ-formulaire">
+                    {{ form.password.label_tag }}
+                    {{ form.password }}
+                </div>
+
+                <div class="champ-formulaire">
+                    {{ form.password_confirm.label_tag }}
+                    {{ form.password_confirm }}
+                </div>
+
+                <button type="submit" class="bouton-reserver">S'inscrire</button>
+            </form>
+        </section>
+    </div>
+
+
+
+</body>
+</html>

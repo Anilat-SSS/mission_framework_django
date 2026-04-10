@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Réservation</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="barre-navigation">
+    <a href="{% url 'reservation' %}">Accueil</a>
+
+    {% if user.is_authenticated %}
+
+        {% if user.is_staff %}
+            <a href="{% url 'gestion_tournois' %}">Tournois</a>
+        {% endif %}
+
+        <span style="color:white; margin-left:20px;">
+            Bonjour {{ user.username }}
+        </span>
+
+        <a href="{% url 'logout_view' %}">Déconnexion</a>
+
+    {% else %}
+        <a href="{% url 'login' %}">Connexion</a>
+    {% endif %}
+</div>
+
+<!-- CONTENU -->
+<div class="container">
+
+    <h1>Page de réservation</h1>
+
+    <p>Bienvenue sur le système de réservation du Cyber Game Café 🎮</p>
+
+    <!-- FORMULAIRE -->
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="champ-formulaire">
+            <label>Motif</label>
+            <input type="text" name="motif" required>
+        </div>
+
+        <div class="champ-formulaire">
+            <label>Temps (secondes)</label>
+            <input type="number" name="temps_secondes" required>
+        </div>
+
+        <!-- 🔥 AJOUT TOURNOI -->
+        <div class="champ-formulaire">
+            <label>Tournoi (optionnel)</label>
+            <select name="tournoi">
+                <option value="">-- Aucun --</option>
+                {% for t in tournois %}
+                    <option value="{{ t.id }}">{{ t.nom }} ({{ t.jeu }})</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="bouton-reserver">
+            Réserver
+        </button>
+    </form>
+
+</div>
+
+</body>
+</html>

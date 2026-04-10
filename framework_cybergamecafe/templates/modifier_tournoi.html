@@ -1,0 +1,12 @@
+<h2>Modifier un tournoi</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <input type="text" name="nom" value="{{ tournoi.nom }}" required>
+    <input type="text" name="jeu" value="{{ tournoi.jeu }}" required>
+    <input type="date" name="date" value="{{ tournoi.date }}" required>
+    <input type="time" name="heure" value="{{ tournoi.heure }}" required>
+
+    <button type="submit">Enregistrer</button>
+</form>
